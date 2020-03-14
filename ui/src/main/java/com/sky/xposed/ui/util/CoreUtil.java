@@ -14,35 +14,27 @@
  * limitations under the License.
  */
 
-package com.sky.xposed.annotations;
+package com.sky.xposed.ui.util;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.sky.xposed.core.interfaces.XCoreManager;
+import com.sky.xposed.core.interfaces.XPreferences;
 
 /**
- * Created by sky on 2020-01-10.
+ * Created by sky on 2020-02-18.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface AConfig {
+public final class CoreUtil {
 
-    /**
-     * 配置包名
-     * @return
-     */
-    String packageName() default "";
+    private static XCoreManager sCoreManager;
 
-    /**
-     * 版本名
-     * @return
-     */
-    String versionName();
+    public static void init(XCoreManager coreManager) {
+        sCoreManager = coreManager;
+    }
 
-    /**
-     * 版本号
-     * @return
-     */
-    int versionCode() default 0;
+    public static XCoreManager getCoreManager() {
+        return sCoreManager;
+    }
+
+    public static XPreferences getDefaultPreferences() {
+        return sCoreManager.getDefaultPreferences();
+    }
 }

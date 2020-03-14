@@ -17,11 +17,12 @@
 package com.sky.xposed.core.interfaces;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by sky on 2020-03-11.
  */
-public interface XPluginManager {
+public interface XPluginManager extends XComponent {
 
     /**
      * 获取相应插件类获取相应插件
@@ -66,5 +67,26 @@ public interface XPluginManager {
          * @return
          */
         List<Class<? extends XPlugin>> pluginList();
+    }
+
+    interface Loader {
+
+        /**
+         * 加载插件
+         * @return
+         */
+        Map<Class<? extends XPlugin>, XPlugin> loadPlugin(Factory factory);
+    }
+
+    /**
+     * 进程
+     */
+    interface Process {
+
+        int ALL = 0x00;
+
+        int MAIN = 0x01;
+
+        int OTHER = 0x02;
     }
 }

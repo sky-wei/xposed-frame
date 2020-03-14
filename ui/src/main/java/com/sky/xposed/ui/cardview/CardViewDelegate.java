@@ -13,36 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.sky.xposed.ui.cardview;
 
-package com.sky.xposed.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import android.graphics.drawable.Drawable;
+import android.view.View;
 
 /**
- * Created by sky on 2020-01-10.
+ * Interface provided by CardView to implementations.
+ * <p>
+ * Necessary to resolve circular dependency between base CardView and platform implementations.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface AConfig {
-
-    /**
-     * 配置包名
-     * @return
-     */
-    String packageName() default "";
-
-    /**
-     * 版本名
-     * @return
-     */
-    String versionName();
-
-    /**
-     * 版本号
-     * @return
-     */
-    int versionCode() default 0;
+interface CardViewDelegate {
+    void setCardBackground(Drawable drawable);
+    Drawable getCardBackground();
+    boolean getUseCompatPadding();
+    boolean getPreventCornerOverlap();
+    void setShadowPadding(int left, int top, int right, int bottom);
+    void setMinWidthHeightInternal(int width, int height);
+    View getCardView();
 }

@@ -14,35 +14,31 @@
  * limitations under the License.
  */
 
-package com.sky.xposed.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package com.sky.xposed.ui.base;
 
 /**
- * Created by sky on 2020-01-10.
+ * Created by sky on 16-9-28.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface AConfig {
+public interface BaseView {
 
     /**
-     * 配置包名
-     * @return
+     * 显示加载提示框
      */
-    String packageName() default "";
+    void showLoading(String text);
 
     /**
-     * 版本名
-     * @return
+     * 显示加载提示框
      */
-    String versionName();
+    void showLoading();
 
     /**
-     * 版本号
-     * @return
+     * 取消加载提示框
      */
-    int versionCode() default 0;
+    void cancelLoading();
+
+    /**
+     * 显示消息
+     * @param msg
+     */
+    void showMessage(String msg);
 }

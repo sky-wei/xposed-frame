@@ -14,35 +14,25 @@
  * limitations under the License.
  */
 
-package com.sky.xposed.annotations;
+package com.sky.xposed.core.adapter;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.sky.xposed.common.util.Alog;
+import com.sky.xposed.javax.MethodHook;
 
 /**
- * Created by sky on 2020-01-10.
+ * Created by sky on 2020-01-13.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface AConfig {
+public class ThrowableAdapter implements MethodHook.ThrowableCallback {
 
-    /**
-     * 配置包名
-     * @return
-     */
-    String packageName() default "";
+    @Override
+    public void onThrowable(Throwable tr) {
 
-    /**
-     * 版本名
-     * @return
-     */
-    String versionName();
+        if (!onTakeOver(tr)) {
+            Alog.e("处理异常", tr);
+        }
+    }
 
-    /**
-     * 版本号
-     * @return
-     */
-    int versionCode() default 0;
+    protected boolean onTakeOver(Throwable tr) {
+        return false;
+    }
 }

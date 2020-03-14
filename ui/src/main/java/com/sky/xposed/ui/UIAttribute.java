@@ -14,35 +14,20 @@
  * limitations under the License.
  */
 
-package com.sky.xposed.annotations;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+package com.sky.xposed.ui;
 
 /**
- * Created by sky on 2020-01-10.
+ * Created by sky on 2020-03-13.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface AConfig {
+public interface UIAttribute {
 
-    /**
-     * 配置包名
-     * @return
-     */
-    String packageName() default "";
+    interface PluginFrame {
 
-    /**
-     * 版本名
-     * @return
-     */
-    String versionName();
+        int style = 0x00100001;
+    }
 
-    /**
-     * 版本号
-     * @return
-     */
-    int versionCode() default 0;
+    interface EditTextItem {
+
+        int style = 0x00200001;
+    }
 }
