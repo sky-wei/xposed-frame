@@ -133,7 +133,7 @@ public class CardView extends LinearLayout {
 //                    ? getResources().getColor(R.color.cardview_light_background)
 //                    : getResources().getColor(R.color.cardview_dark_background));
 //        }
-        float radius = DisplayUtil.DIP_8;       // a.getDimension(R.styleable.CardView_cardCornerRadius, 0);
+        float radius = DisplayUtil.DIP_4;       // a.getDimension(R.styleable.CardView_cardCornerRadius, 0);
         float elevation = DisplayUtil.DIP_4;    // a.getDimension(R.styleable.CardView_cardElevation, 0);
         float maxElevation = 0; // a.getDimension(R.styleable.CardView_cardMaxElevation, 0);
         mCompatPadding = false; // a.getBoolean(R.styleable.CardView_cardUseCompatPadding, false);
