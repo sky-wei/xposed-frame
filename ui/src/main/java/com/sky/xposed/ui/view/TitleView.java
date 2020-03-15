@@ -98,14 +98,6 @@ public class TitleView extends XFrameItemView implements View.OnClickListener {
         addView(tLayout, params);
         addView(mMoreLayout, moreParams);
 
-        View lineView = new View(getContext());
-        lineView.setBackgroundColor(UIConstant.Color.LINE_BACKGROUND);
-
-        addView(lineView, new LayoutUtil.Build()
-                .setHeight(2)
-                .setGravity(Gravity.BOTTOM)
-                .frameParams());
-
         hideBack();
     }
 
