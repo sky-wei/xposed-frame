@@ -19,6 +19,7 @@ package com.sky.xposed.frame;
 import android.app.Application;
 import android.content.Context;
 
+import com.sky.xposed.core.XStore;
 import com.sky.xposed.core.adapter.CoreListenerAdapter;
 import com.sky.xposed.core.adapter.ThrowableAdapter;
 import com.sky.xposed.core.component.ComponentFactory;
@@ -78,12 +79,12 @@ public class Main implements IXposedHookLoadPackage {
                 .setComponentFactory(new ComponentFactory() {
                     @Override
                     protected List<Class<? extends XConfig>> getVersionData() {
-                        return super.getVersionData();
+                        return XStore.getConfigClass();
                     }
 
                     @Override
                     protected List<Class<? extends XPlugin>> getPluginData() {
-                        return super.getPluginData();
+                        return XStore.getPluginClass();
                     }
                 })
                 .setCoreListener(new CoreListenerAdapter() {

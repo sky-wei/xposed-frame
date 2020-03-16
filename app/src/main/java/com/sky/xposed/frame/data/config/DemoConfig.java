@@ -14,35 +14,20 @@
  * limitations under the License.
  */
 
-package com.sky.xposed.annotations;
+package com.sky.xposed.frame.data.config;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.sky.xposed.annotations.AConfig;
+import com.sky.xposed.core.base.AbstractConfig;
 
 /**
- * Created by sky on 2020-01-10.
+ * Created by sky on 2020-03-16.
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface AConfig {
+@AConfig()
+public class DemoConfig extends AbstractConfig {
 
-    /**
-     * 配置包名
-     * @return
-     */
-    String packageName() default "";
+    @Override
+    protected void onLoadConfig() {
 
-    /**
-     * 版本名
-     * @return
-     */
-    String versionName() default "";
-
-    /**
-     * 版本号
-     * @return
-     */
-    int versionCode() default 0;
+        add(0, "bbbbb");
+    }
 }
