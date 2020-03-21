@@ -31,6 +31,11 @@ public class DemoPlugin extends AbstractPlugin {
     }
 
     @Override
+    public void initialize() {
+        super.initialize();
+    }
+
+    @Override
     public void hook() {
 
         findMethod("con.xxxx.class", "method")

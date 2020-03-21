@@ -28,6 +28,7 @@ import com.sky.xposed.core.info.PluginPackage;
 import com.sky.xposed.core.interfaces.XComponent;
 import com.sky.xposed.core.interfaces.XComponentManager;
 import com.sky.xposed.core.interfaces.XCoreManager;
+import com.sky.xposed.core.interfaces.XEventManager;
 import com.sky.xposed.core.interfaces.XPluginManager;
 import com.sky.xposed.core.interfaces.XPreferences;
 import com.sky.xposed.core.interfaces.XResourceManager;
@@ -46,6 +47,7 @@ public final class CoreManager implements XCoreManager {
     private XPreferences mPreferences;
     private XPluginManager mPluginManager;
     private XVersionManager mVersionManager;
+    private XEventManager mEventManager;
 
     private CoreManager(Build build) {
 
@@ -72,6 +74,7 @@ public final class CoreManager implements XCoreManager {
         mPreferences = getComponent(XPreferences.class);
         mVersionManager = getComponent(XVersionManager.class);
         mPluginManager = getComponent(XPluginManager.class);
+        mEventManager = getComponent(XEventManager.class);
 
         if (build.mXCoreListener != null) {
             build.mXCoreListener.onInitComplete(this);
@@ -111,6 +114,11 @@ public final class CoreManager implements XCoreManager {
     @Override
     public XPreferences getPreferencesByName(String name) {
         return mPreferences.getPreferences(name);
+    }
+
+    @Override
+    public XEventManager getEventManager() {
+        return mEventManager;
     }
 
     @Override

@@ -22,6 +22,8 @@ import com.sky.xposed.core.info.LoadPackage;
 import com.sky.xposed.core.interfaces.XComponentManager;
 import com.sky.xposed.core.interfaces.XConfig;
 import com.sky.xposed.core.interfaces.XCoreManager;
+import com.sky.xposed.core.interfaces.XEvent;
+import com.sky.xposed.core.interfaces.XEventManager;
 import com.sky.xposed.core.interfaces.XPlugin;
 import com.sky.xposed.core.interfaces.XPluginManager;
 import com.sky.xposed.core.interfaces.XPreferences;
@@ -43,6 +45,7 @@ public abstract class AbstractPlugin implements XPlugin {
     private XPreferences mPreferences;
     private XVersionManager mVersionManager;
     private XPluginManager mPluginManager;
+    private XEventManager mEventManager;
     private XComponentManager mComponentManager;
     private XConfig mConfig;
 
@@ -52,6 +55,7 @@ public abstract class AbstractPlugin implements XPlugin {
         mPreferences = mCoreManager.getDefaultPreferences();
         mVersionManager = mCoreManager.getVersionManager();
         mPluginManager = mCoreManager.getPluginManager();
+        mEventManager = mCoreManager.getEventManager();
         mComponentManager = mCoreManager.getComponentManager();
         mConfig = mVersionManager.getSupportConfig();
     }
@@ -86,6 +90,10 @@ public abstract class AbstractPlugin implements XPlugin {
         return mPluginManager;
     }
 
+    public XEventManager getEventManager() {
+        return mEventManager;
+    }
+
     public XComponentManager getComponentManager() {
         return mComponentManager;
     }
@@ -108,6 +116,14 @@ public abstract class AbstractPlugin implements XPlugin {
 
     public boolean hasPlugin(Class<? extends XPlugin> tClass) {
         return mPluginManager.hasPlugin(tClass);
+    }
+
+    public <T extends XEvent> void register(Class<T> eClass, T observer) {
+        getEventManager().register(eClass, observer);
+    }
+
+    public <T extends XEvent> void notice(Class<T> eClass, XEventManager.Callback<T> callback) {
+        getEventManager().notice(eClass, callback);
     }
 
     public boolean isEnable(String key, boolean defValue) {

@@ -17,6 +17,7 @@
 package com.sky.xposed.core.component;
 
 import com.sky.xposed.core.base.AbstractComponent;
+import com.sky.xposed.core.interfaces.XCoreManager;
 import com.sky.xposed.core.interfaces.XEvent;
 import com.sky.xposed.core.interfaces.XEventManager;
 
@@ -32,28 +33,55 @@ public class EventManager extends AbstractComponent implements XEventManager {
 
     private Map<Class<? extends XEvent>, List<XEvent>> mClassListMap = new HashMap<>();
 
-    @Override
-    public <T extends XEvent> void register(Class<T> tClass, T listener) {
+    private XCoreManager mCoreManager;
 
-        List<XEvent> events = mClassListMap.get(tClass);
-
-        if (events == null) {
-            events = new ArrayList<>();
-            mClassListMap.put(tClass, events);
-        }
-
-        events.add(listener);
+    private EventManager(Build build) {
+        mCoreManager = build.mCoreManager;
     }
 
     @Override
-    public <T extends XEvent> void notice(Class<T> tClass, Callback<T> callback) {
+    public <T extends XEvent> void register(Class<T> eClass, T observer) {
 
-        List<XEvent> events = mClassListMap.get(tClass);
+        List<XEvent> events = mClassListMap.get(eClass);
+
+        if (events == null) {
+            events = new ArrayList<>();
+            mClassListMap.put(eClass, events);
+        }
+
+        events.add(observer);
+    }
+
+    @Override
+    public <T extends XEvent> void unregister(Class<T> eClass, T observer) {
+
+        List<XEvent> events = mClassListMap.get(eClass);
+
+        if (events != null) events.remove(observer);
+    }
+
+    @Override
+    public <T extends XEvent> void notice(Class<T> eClass, Callback<T> callback) {
+
+        List<XEvent> events = mClassListMap.get(eClass);
 
         if (events == null) return;
 
         for (XEvent event : events) {
-            callback.onHandler(tClass.cast(event));
+            callback.onHandler(eClass.cast(event));
+        }
+    }
+
+    public static class Build {
+
+        private XCoreManager mCoreManager;
+
+        public Build(XCoreManager coreManager) {
+            mCoreManager = coreManager;
+        }
+
+        public XEventManager build() {
+            return new EventManager(this);
         }
     }
 }

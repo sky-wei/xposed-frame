@@ -19,14 +19,20 @@ package com.sky.xposed.core.interfaces;
 /**
  * Created by sky on 2020-03-17.
  */
-public interface XEventManager {
+public interface XEventManager extends XComponent {
 
-    <T extends XEvent> void register(Class<T> tClass, T listener);
+    <T extends XEvent> void register(Class<T> eClass, T observer);
 
-    <T extends XEvent> void notice(Class<T> tClass, Callback<T> callback);
+    <T extends XEvent> void unregister(Class<T> eClass, T observer);
 
+    <T extends XEvent> void notice(Class<T> eClass, Callback<T> callback);
+
+    /**
+     * 回调处理
+     * @param <T>
+     */
     interface Callback<T> {
 
-        void onHandler(T listener);
+        void onHandler(T observer);
     }
 }

@@ -22,6 +22,7 @@ import com.sky.xposed.core.interfaces.XComponent;
 import com.sky.xposed.core.interfaces.XComponentManager;
 import com.sky.xposed.core.interfaces.XConfig;
 import com.sky.xposed.core.interfaces.XCoreManager;
+import com.sky.xposed.core.interfaces.XEventManager;
 import com.sky.xposed.core.interfaces.XPlugin;
 import com.sky.xposed.core.interfaces.XPluginManager;
 import com.sky.xposed.core.interfaces.XPreferences;
@@ -51,6 +52,9 @@ public class ComponentFactory implements XComponentManager.Factory {
         } else if (XPluginManager.class == name) {
             // 创建XPluginManager
             return name.cast(createPluginManager(coreManager));
+        } else if (XEventManager.class == name) {
+            // 创建XEventManager
+            return name.cast(createEventManager(coreManager));
         }
         return null;
     }
@@ -90,6 +94,11 @@ public class ComponentFactory implements XComponentManager.Factory {
     protected XPluginManager createPluginManager(XCoreManager coreManager) {
         return new PluginManager.Build(coreManager)
                 .setFactory(this::getPluginData)
+                .build();
+    }
+
+    protected XEventManager createEventManager(XCoreManager coreManager) {
+        return new EventManager.Build(coreManager)
                 .build();
     }
 

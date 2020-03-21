@@ -71,6 +71,12 @@ public interface XCoreManager {
     XPreferences getPreferencesByName(String name);
 
     /**
+     * 事件处理管理
+     * @return
+     */
+    XEventManager getEventManager();
+
+    /**
      * 获取组件
      * @param name
      * @param <T>
