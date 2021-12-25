@@ -1,17 +1,21 @@
 apply plugin: 'java-library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven-publish'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
 
-publish {
-    userOrg = 'sky-wei'
-    groupId = 'com.sky.xposed'
-    artifactId = 'annotations'
-    publishVersion = '1.0.0'
-    desc = 'annotations'
-    website = 'https://github.com/sky-wei/xposed-frame'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+//                from components.release
+                groupId = 'com.github.jingcai-wei.xposed-frame'
+                artifactId = 'annotations'
+                version = '1.0.1'
+            }
+        }
+    }
 }
 
 sourceCompatibility = "8"

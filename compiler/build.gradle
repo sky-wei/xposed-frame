@@ -1,5 +1,5 @@
 apply plugin: 'java-library'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'maven-publish'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -7,18 +7,22 @@ dependencies {
     annotationProcessor 'com.google.auto.service:auto-service:1.0-rc5'
     implementation 'com.squareup:javapoet:1.13.0'
     implementation 'com.google.auto:auto-common:0.10'
-    implementation 'com.google.code.gson:gson:2.8.6'
-    implementation 'com.sky.xposed:annotations:1.0.0'
-    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
+    implementation 'com.google.code.gson:gson:2.8.9'
+    implementation 'com.sky.xposed:annotations:1.0.1'
+//    compileOnly files(org.gradle.internal.jvm.Jvm.current().getToolsJar())
 }
 
-publish {
-    userOrg = 'sky-wei'
-    groupId = 'com.sky.xposed'
-    artifactId = 'compiler'
-    publishVersion = '1.0.0'
-    desc = 'compiler'
-    website = 'https://github.com/sky-wei/xposed-frame'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+//                from components.release
+                groupId = 'com.github.jingcai-wei.xposed-frame'
+                artifactId = 'compiler'
+                version = '1.0.1'
+            }
+        }
+    }
 }
 
 sourceCompatibility = "8"
