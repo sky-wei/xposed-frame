@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 29
@@ -23,10 +24,19 @@ android {
     }
 }
 
+publish {
+    userOrg = 'sky-wei'
+    groupId = 'com.sky.xposed'
+    artifactId = 'ui'
+    publishVersion = '1.0.0'
+    desc = 'ui'
+    website = 'https://github.com/sky-wei/xposed-frame'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.github.sky-wei:xposed-common:1.2.0'
-    implementation project(':core')
+    implementation 'com.sky.xposed:core:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.71828'
     compileOnly 'de.robv.android.xposed:api:82'
     compileOnly 'com.github.sky-wei:xposed-javax:1.2.0'

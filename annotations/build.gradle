@@ -1,8 +1,17 @@
 apply plugin: 'java-library'
+apply plugin: 'com.novoda.bintray-release'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
 
+publish {
+    userOrg = 'sky-wei'
+    groupId = 'com.sky.xposed'
+    artifactId = 'annotations'
+    publishVersion = '1.0.0'
+    desc = 'annotations'
+    website = 'https://github.com/sky-wei/xposed-frame'
 }
 
 sourceCompatibility = "8"
