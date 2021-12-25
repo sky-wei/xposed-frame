@@ -29,7 +29,7 @@ afterEvaluate {
                 from components.release
                 groupId = 'com.github.jingcai-wei.xposed-frame'
                 artifactId = 'core'
-                version = '1.0.1'
+                version = '1.0.2'
             }
         }
     }
@@ -39,7 +39,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.github.sky-wei:xposed-common:1.2.0'
     implementation 'com.github.sky-wei:xposed-javax:1.2.0'
-    implementation 'com.sky.xposed:annotations:1.0.1'
+    implementation project(':annotations')
     compileOnly 'de.robv.android.xposed:api:82'
     compileOnly 'com.rover12421.AndroidHideApi:android:1.17'
 }

@@ -9,10 +9,9 @@ afterEvaluate {
     publishing {
         publications {
             release(MavenPublication) {
-//                from components.release
                 groupId = 'com.github.jingcai-wei.xposed-frame'
                 artifactId = 'annotations'
-                version = '1.0.1'
+                version = '1.0.2'
             }
         }
     }
